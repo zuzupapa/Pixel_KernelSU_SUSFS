@@ -85,7 +85,6 @@ runs:
       shell: bash
       working-directory: ${{ github.workspace }}/kernel/aosp/KernelSU-Next
       run: |
-        ls -l ${{ github.workspace }}/kernel_patches/wild/ksun-0daf55582-susfs-v2.1.0-e259e7d6.patch
         cp ${{ github.workspace }}/kernel_patches/wild/ksun-0daf55582-susfs-v2.1.0-e259e7d6.patch ./
         patch -p1 < ksun-0daf55582-susfs-v2.1.0-e259e7d6.patch || true
-        python3 ${{ github.workspace }}/.github/actions/susfs/fix_init_hunk3.py
+        python3 ${{ github.workspace }}/.github/actions/susfs/fix_init_hunk3.py || true
