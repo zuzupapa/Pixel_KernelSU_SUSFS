@@ -6,10 +6,8 @@ runs:
   steps:
     - name: Install Baseband Guard
       shell: bash
-      working-directory: ${{ github.workspace }}/kernel
+      working-directory: ${{ github.workspace }}/kernel/aosp
       run: |
-        # Google GKI kernel source is under aosp/, setup.sh expects security/ at root
-        ln -sf aosp/security security 2>/dev/null || true
         wget -O- https://github.com/vc-teahouse/Baseband-guard/raw/main/setup.sh | bash
     
     - name: Configure Baseband Guard
@@ -36,7 +34,7 @@ runs:
     
     - name: Extract BBG Version
       shell: bash
-      working-directory: ${{ github.workspace }}/kernel/Baseband-guard
+      working-directory: ${{ github.workspace }}/kernel/aosp/Baseband-guard
       run: |
         # Extract and export BBG version info
         BBG_COMMIT=$(git rev-parse --short HEAD 2>/dev/null)
