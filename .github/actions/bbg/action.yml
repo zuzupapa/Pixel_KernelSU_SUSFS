@@ -8,6 +8,8 @@ runs:
       shell: bash
       working-directory: ${{ github.workspace }}/kernel
       run: |
+        # Google GKI kernel source is under aosp/, setup.sh expects security/ at root
+        ln -sf aosp/security security 2>/dev/null || true
         wget -O- https://github.com/vc-teahouse/Baseband-guard/raw/main/setup.sh | bash
     
     - name: Configure Baseband Guard
