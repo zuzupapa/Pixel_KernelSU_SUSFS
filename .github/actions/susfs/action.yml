@@ -85,7 +85,6 @@ runs:
       shell: bash
       working-directory: ${{ github.workspace }}/kernel/aosp/KernelSU-Next
       run: |
-        # Pre-patch: remove allow_shell block (added in f08381731) that breaks hunk #3 context
-        sed -i '/^#ifdef CONFIG_KSU_DEBUG$/,/^module_param(allow_shell, bool, 0);$/d' kernel/core/init.c
         cp ${{ github.workspace }}/kernel_patches/wild/ksun-0daf55582-susfs-v2.1.0-e259e7d6.patch ./
-        patch -p1 < ksun-0daf55582-susfs-v2.1.0-e259e7d6.patch
+        patch -p1 < ksun-0daf55582-susfs-v2.1.0-e259e7d6.patch || true
+        python3 ${{ github.workspace }}/.github/actions/susfs/fix_init_hunk3.py
